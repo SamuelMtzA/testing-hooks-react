@@ -8,6 +8,7 @@ export const MultipleCustomHooks = () => {
 
     const { counter, increment } = useCounter(1);
     const { data, isLoading, hasError } = useFetch(`https://www.breakingbadapi.com/api/quotes/${ counter }`);
+    // if data is null, !!null is false
     const { author, quote } = !!data && data[0];
     
     return (

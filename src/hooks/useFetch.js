@@ -12,19 +12,24 @@ export const useFetch = ( url ) => {
 
     const getFetch = async () => {
 
-        setState({
-            ...state,
-            isLoading: true,
-        });
+        try {
+            setState({
+                ...state,
+                isLoading: true,
+            });
+    
+            const resp = await fetch(url);
+            const data = await resp.json();
+    
+            setState({
+                data,
+                isLoading: false,
+                hasError: null,
+            });
+        } catch (error) {
+            throw new Error(error);
+        }
 
-        const resp = await fetch(url);
-        const data = await resp.json();
-
-        setState({
-            data,
-            isLoading: false,
-            hasError: null,
-        });
     }
 
 
